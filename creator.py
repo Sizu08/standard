@@ -104,7 +104,7 @@ def createRoyal(player):
                           gm.Race.ELF, "placeholder", False)
         newDeck.cards.append(newCard)
 
-    print(len(newDeck.cards))
+    return newDeck
 
 
 def initializePlayer(id, name, deck, hand):

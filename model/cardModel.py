@@ -11,3 +11,6 @@ class Card:
         self.race = race
         self.effect = effect
         self.sentinel = sentinel
+
+    def cardName(self):
+        return self.name
