@@ -11,4 +11,4 @@ def gameLoop(game):
     while True:
         fv.showField(game)
         pv.showPlayers(game)
-        input("prompting user")
+        input("\n prompting user")

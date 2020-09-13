@@ -10,13 +10,13 @@ def showField(game):
         if isinstance(field0[i].getTop(), str):
             print(field0[i].getTop())
         else:
-            print(field0[i].getTop().cardName())
+            print(field0[i].getTop().getName())
 
     print("player 2 field:")
     for i in range(6):
         if isinstance(field1[i].getTop(), str):
             print(field1[i].getTop())
         else:
-            print(field1[i].getTop().cardName())
+            print(field1[i].getTop().getName())
 
     print()

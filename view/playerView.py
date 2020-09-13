@@ -7,3 +7,5 @@ def showPlayers(game):
 
         for j in range(len(game.getPlayer(i).getHand().getCards())):
             print(game.getPlayer(i).getHand().getCards()[j])
+        print()
+    return

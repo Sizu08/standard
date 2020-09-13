@@ -107,30 +107,53 @@ def createRoyal(player):
     return newDeck
 
 
-def initializePlayer(id, name, deck, hand):
-    return gm.Player(id, name, deck, hand)
+def initializePlayer(id, name, deck):
+    return gm.Player(id, name, deck)
 
 
-def initializeSide(player):
-    side = []
+def initializeSide(playerID, fore):
+    zones = []
 
     for i in range(6):
-        side.append(initializeZone(player, i))
+        zones.append(initializeZone(playerID, i))
 
-    return side
+    zones[1].add(fore)
+    return zones
 
 
-def initializeZone(player, position):
-    return gm.Zone(player, position, [])
+def initializeZone(playerID, position):
+    return gm.Zone(playerID, position, [])
 
 
 def initializeGame():
     players = []
-    players.append(initializePlayer(0, "Abel", createRoyal(0), []))
-    players.append(initializePlayer(1, "Cain", createRoyal(1), []))
-
     field = []
-    field.append(initializeSide(0))
-    field.append(initializeSide(1))
+
+    players.append(initializePlayer(0, "Abel", createRoyal(0)))
+    players.append(initializePlayer(1, "Cain", createRoyal(1)))
+
+    for i in range(2):
+        fore = chooseForerunner(players[i])
+        field.append(initializeSide(i, fore))
+        players[i].shuffle()
+        players[i].draw(5)
 
     return gm.Game(0, players, field)
+
+
+def initializeHand(player):
+    return
+
+
+def chooseForerunner(player):
+    deckList = player.getDeck().getCards()
+
+    for i in range(len(deckList)):
+        print(str(i) + ":" + str(deckList[i]))
+
+    print()
+
+    choice = int(input(player.getName() + ", Choose your forerunner"))
+    print("popping : ")
+
+    return deckList.pop(choice)

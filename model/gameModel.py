@@ -1,4 +1,5 @@
 from enum import Enum
+import random
 
 
 class Clan(Enum):
@@ -33,13 +34,14 @@ class Race(Enum):
 
 
 class Position(Enum):
-    LEFTFRONT = 1
-    CENTERFRONT = 2
-    RIGHTFRONT = 3
-    LEFTBACK = 4
-    CENTERBACK = 5
-    RIGHTBACK = 6
-    DAMAGE = 7
+    LEFTFRONT = 0
+    CENTERFRONT = 1
+    RIGHTFRONT = 2
+    LEFTBACK = 3
+    CENTERBACK = 4
+    RIGHTBACK = 5
+    DAMAGE = 6
+    GUARDIAN = 7
 
 
 class Game:
@@ -57,12 +59,11 @@ class Game:
 
 
 class Player:
-    def __init__(self, id, name, deck, hand):
+    def __init__(self, id, name, deck):
         self.id = id
         self.name = name
         self.deck = deck
-        newHand = Hand([1, 2])
-        self.hand = newHand
+        self.hand = Hand([])
         self.damageZone = Zone(id, Position.DAMAGE, [])
 
     def getName(self):
@@ -78,6 +79,15 @@ class Player:
         self.damage = len(self.damageZone.getCards())
         return self.damage
 
+    def draw(self, x=1):
+        for i in range(x):
+            self.hand.add(self.deck.getCards().pop(-1))
+        return
+
+    def shuffle(self):
+        random.shuffle(self.deck.getCards())
+        return
+
 
 class Deck:
     def __init__(self, player, name, cards):
@@ -87,6 +97,9 @@ class Deck:
 
     def getName(self):
         return self.name
+
+    def getCards(self):
+        return self.cards
 
 
 class Zone:
@@ -103,6 +116,9 @@ class Zone:
             return self.cards[-1]
         else:
             return "empty"
+
+    def add(self, card):
+        self.cards.append(card)
 
 
 class Hand:

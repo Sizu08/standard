@@ -12,5 +12,8 @@ class Card:
         self.effect = effect
         self.sentinel = sentinel
 
-    def cardName(self):
+    def getName(self):
         return self.name
+
+    def __repr__(self):
+        return repr(self.name)
